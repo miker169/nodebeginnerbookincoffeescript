@@ -1,10 +1,10 @@
 http = require "http"
 url = require "url"
-start = ->
+start = (route, handle) ->
   onRequest = (request, response) -> 
     pathname = url.parse(request.url).pathname
     console.log "Request Received for  " + pathname
-    response.end "Hello World"
+    response.end route handle, pathname
   server = http.createServer onRequest
   server.listen 8888
   console.log "Server has started"
