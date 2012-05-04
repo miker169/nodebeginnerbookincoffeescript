@@ -1,11 +1,9 @@
 exec =  require("child_process").exec
-exports.start = start = ->
+exports.start = start =(response) ->
   console.log "Request handler 'start' was called"
-  content = "empty"
   exec("ls -lah", (error, stdout, stderr) ->
-    content = stdout
+    response.end stdout
   )
-  return content
-exports.upload = upload = ->
+exports.upload = upload =(response) ->
   console.log "Request handler 'upload was called"
-  return "Hello Upload"
+  response.end "Hello Upload"
