@@ -1,8 +1,10 @@
-route = (handle, pathname, response) ->
+route = (handle, pathname, response, postData) ->
   console.log "About to route a request for" + pathname
   if typeof handle[pathname] is "function"
-    handle[pathname](response)
+    handle[pathname](response, postData)
   else
     console.log "No request handler found for " + pathname
-    response.end "404 Not Found"
+    response.writeHead 404, {"Content-Type": "text/plain"}
+    response.write "404 Not Found"
+    response.end
 exports.route = route
